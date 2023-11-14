@@ -2,9 +2,15 @@
 @model IndexModel
 @{
     ViewData["Title"] = "Home page";
+    //string key = "infobox";
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-5">Poslední návštěva: @Model.LastAccess</h1>
+    <p>@Model.AppName</p>
 </div>
+
+@*
+    lepsi tento kod odsunout do globalniho view, tedy do _Layout.cshtml
+<partial name="_InfoBoxTempData" model="@key" />
+*@

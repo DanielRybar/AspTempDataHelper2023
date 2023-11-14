@@ -1,7 +1,24 @@
+using Serilog;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+
+// Logování
+
+// balicky
+// Serilog
+// Serilog.AspNetCore
+// Serilog.Sinks.File
+var sLog = new LoggerConfiguration()
+    .ReadFrom.Configuration(builder.Configuration)
+    .Enrich.FromLogContext() // barevne
+    .WriteTo.Console()
+    .WriteTo.File("Logs\\log.txt", rollingInterval: RollingInterval.Day) // zapisuje do souboru Logs/log.txt
+    .CreateLogger();
+builder.Logging.ClearProviders();
+builder.Logging.AddSerilog(sLog);
 
 var app = builder.Build();
 
